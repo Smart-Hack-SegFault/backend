@@ -8,5 +8,6 @@ url = os.environ.get("SUPABASE_URL")
 key = os.environ.get("SUPABASE_KEY")
 
 client = supabase.create_client(url, key)
+response = client.table('User').select('*').eq('organization', 1).execute()
+print(response)
 
-client.table("Test-Table").insert({'name': 'Lucian'}).execute()
