@@ -2,7 +2,6 @@ import os
 import dotenv
 import supabase
 import pandas as pd
-from ai_integration import gpt_integration as ai
 from utils import get_user_info as user_query
 from data_manipulation import statistics
 
@@ -37,8 +36,6 @@ async def fetch_user_skill_days_stats(user_id, tag_id):
     return stats, data
 
 
-# TODO: Implement Streak getter
-
 @app.get("/user/{user_id}/skill/recommend")
 async def get_recommended_skills(user_id):
     return user_query.get_recommended_skills(user_id, client)
@@ -49,6 +46,11 @@ async def get_skill_streak(user_id, skill_id):
     return user_query.get_user_skill_streak(user_id, skill_id, client)
 
 
-@app.get("/user/recommendation/{tags}/{level}")
-async def get_ai_recommendation(tags: str, level: int):
-    return ai.skill_improv_task_suggestion(tags, level)
+@app.get("/user/{user_id}/daily-activity")
+async def get_daily_activity(user_id):
+    return user_query.get_user_dailies(user_id, client)
+
+
+@app.get("/user/{user_id}/daily-activity")
+async def get_daily_activity(user_id):
+    return user_query.get_user_dailies(user_id, client)

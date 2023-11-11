@@ -5,8 +5,10 @@ def get_recommended_skills(user_id, sb_client):
     user_skills = sb_client.table('User_Skill').select('Tags(*)').eq('user', user_id).execute().data
     categories = [category['Tags']['category'] for category in user_skills]
 
-    skills = sb_client.table('Tags').select('*').in_('category', categories).execute()
-    return skills
+    skills = sb_client.table('Tags').select('*').in_('category', categories).execute().data
+
+    user_skills_id = [val['Tags']['id'] for val in user_skills]
+    return [skill for skill in skills if skill['id'] not in user_skills_id]
 
 
 def get_user_skill_hours(user_id, tag_id, sb_client):
@@ -44,3 +46,15 @@ def get_user_skill_streak(user_id, skill_id, sb_client):
         return streak
 
     return 0
+
+
+def get_user_dailies(user_id, sb_client):
+    user_skills_dailies = sb_client.table('User_Skill').select('DailyWork(date)').eq('user', user_id).execute().data
+
+    result = []
+    for skill in user_skills_dailies:
+        for date in skill['DailyWork']:
+            date['count'] = 1
+            result.append(date)
+
+    return result
