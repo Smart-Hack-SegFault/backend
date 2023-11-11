@@ -4,6 +4,7 @@ import supabase
 import pandas as pd
 from utils import get_user_info as user_query
 from data_manipulation import statistics
+from ai_integration import gpt_integration as ai
 
 from fastapi import FastAPI
 
