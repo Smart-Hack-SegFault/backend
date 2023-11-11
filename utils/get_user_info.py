@@ -58,4 +58,4 @@ def get_user_dailies(user_id, sb_client):
             date['count'] = 1
             result.append(date)
 
-    return json.dumps(result)
+    return result
