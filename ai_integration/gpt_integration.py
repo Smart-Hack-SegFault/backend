@@ -33,10 +33,12 @@ def skill_improv_task_suggestion(tags, level):  # tags va fi un string si level 
                     }
                 ],
                 model="gpt-3.5-turbo",
+                max_tokens=512,
+                temperature=1.01,
                 stop=["\n{"]
             )
             json_ans = json.loads(response.choices[0].message.content)
-            if not (isinstance(json_ans["project"], str) and isinstance(json_ans['hours'], int)):
+            if not (isinstance(json_ans["project"], str) and isinstance(json_ans["description"], str) and isinstance(json_ans['hours'], int)):
                 raise ValueError
             return json_ans
         except:
