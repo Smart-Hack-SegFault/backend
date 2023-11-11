@@ -36,7 +36,8 @@ async def fetch_user_skill_days_stats(user_id, tag_id):
     return stats, data
 
 
-# implement get_streak, get_similar_skills
+# TODO: Implement Streak getter
+
 @app.get("/user/{user_id}/skill/recommend")
-async def get_recommended_skills():
-    pass
+async def get_recommended_skills(user_id):
+    return user_query.get_recommended_skills(user_id, client)
