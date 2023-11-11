@@ -1,3 +1,7 @@
+def get_recommended_skills(user_id, sb_client):
+    user_skills = sb_client.table('User_Skill').select('*, Tags(Categories(*))').eq('user', user_id).execute().data
+    
+
 def get_user_skill_hours(user_id, tag_id, sb_client):
     user_skill = sb_client.table('User_Skill').select('*').eq('user', user_id).eq('tag', tag_id).execute().data[0]
     days_worked = sb_client.table('DailyWork').select('*').eq('user_skill', user_skill['id']).execute().data
