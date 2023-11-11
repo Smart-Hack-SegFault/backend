@@ -22,15 +22,21 @@ async def root():
     return {"message": "Hello World"}
 
 
-@app.get("/user/{user_id}/task/{tag_id}/hours")
-async def fetch_user_task_hours(user_id, tag_id):
-    data = user_query.get_user_task_hours(user_id, tag_id, client)
+@app.get("/user/{user_id}/skill/{tag_id}/hours")
+async def fetch_user_skill_hours(user_id, tag_id):
+    data = user_query.get_user_skill_hours(user_id, tag_id, client)
     return data
 
 
-@app.get("/user/{user_id}/task/{tag_id}/stats")
-async def fetch_user_task_days_stats(user_id, tag_id):
-    temp = pd.DataFrame(user_query.get_user_task_days(user_id, tag_id, client))
+@app.get("/user/{user_id}/skill/{tag_id}/stats")
+async def fetch_user_skill_days_stats(user_id, tag_id):
+    temp = pd.DataFrame(user_query.get_user_skill_days(user_id, tag_id, client))
     data = temp[['date', 'hours']]
     stats = statistics.compute_stats_work_days(data)
     return stats, data
+
+
+# implement get_streak, get_similar_skills
+@app.get("/user/{user_id}/")
+async def get_similar_skills():
+    pass
