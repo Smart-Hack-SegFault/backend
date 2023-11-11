@@ -3,6 +3,7 @@ import dotenv
 import supabase
 import pandas as pd
 from utils import get_user_info as user_query
+from data_manipulation import statistics
 
 from fastapi import FastAPI
 
@@ -29,6 +30,10 @@ async def fetch_user_task_hours(user_id, tag_id):
     return data
 
 @app.get("/hello/{user_id}/{tag_id}")
-async def fetch_user_task_days(user_id, tag_id):
-    data = user_query.get_user_task_days(user_id, tag_id, client)
-    return data
+async def fetch_user_task_days_stats(user_id, tag_id):
+    temp = pd.DataFrame(user_query.get_user_task_days(user_id, tag_id, client))
+    data = temp[['date', 'hours']]
+    stats = statistics.compute_stats_work_days(data)
+    return stats, data
+
+print(fetch_user_task_days(2, 7))
