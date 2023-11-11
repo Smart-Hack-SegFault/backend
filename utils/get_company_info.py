@@ -7,6 +7,3 @@ def get_user_hours(user_id, tag_id, sb_client):
         days_hours_sum += day['hours']
 
     return user_skill['init_hours'] + days_hours_sum
-
-
-
