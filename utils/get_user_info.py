@@ -55,7 +55,7 @@ def get_user_dailies(user_id, sb_client):
     result = []
     for skill in user_skills_dailies:
         for date in skill['DailyWork']:
-            date["count"] = 1
+            date['count'] = 1
             result.append(date)
 
-    return {"result": result}
+    return result
