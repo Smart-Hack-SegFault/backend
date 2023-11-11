@@ -8,5 +8,5 @@ url = os.environ.get("SUPABASE_URL")
 key = os.environ.get("SUPABASE_KEY")
 
 client = supabase.create_client(url, key)
-response = client.table('User').select('*').eq('organization', 1).execute()
+response = client.table('Organizations').select('*, User()').eq('id', 1).execute()
 print(response)

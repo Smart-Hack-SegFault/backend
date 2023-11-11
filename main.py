@@ -7,9 +7,7 @@ from data_manipulation import statistics
 
 from fastapi import FastAPI
 
-
 app = FastAPI()
-
 
 dotenv.load_dotenv()
 
@@ -24,16 +22,15 @@ async def root():
     return {"message": "Hello World"}
 
 
-@app.get("/hello/{user_id}/{tag_id}")
+@app.get("/user/{user_id}/task/{tag_id}/hours")
 async def fetch_user_task_hours(user_id, tag_id):
     data = user_query.get_user_task_hours(user_id, tag_id, client)
     return data
 
-@app.get("/hello/{user_id}/{tag_id}")
+
+@app.get("/user/{user_id}/task/{tag_id}/stats")
 async def fetch_user_task_days_stats(user_id, tag_id):
     temp = pd.DataFrame(user_query.get_user_task_days(user_id, tag_id, client))
     data = temp[['date', 'hours']]
     stats = statistics.compute_stats_work_days(data)
     return stats, data
-
-print(fetch_user_task_days(2, 7))
