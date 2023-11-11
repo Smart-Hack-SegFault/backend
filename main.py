@@ -68,3 +68,8 @@ async def get_daily_activity(user_id):
 @app.get("/user/recommendation/{tags}/{level}")
 async def get_ai_recommendation(tags: str, level: int):
     return ai.skill_improv_task_suggestion(tags, level)
+
+
+@app.get("/user/{user_id}/top-categories")
+async def get_user_top_categories(user_id):
+    return user_query.get_user_top_categories(user_id, client)

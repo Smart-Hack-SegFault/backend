@@ -59,3 +59,36 @@ def get_user_dailies(user_id, sb_client):
             result.append(date)
 
     return result
+
+
+def get_user_top_categories(user_id, sb_client):
+    user_skills = sb_client.table('User_Skill').select("*, Tags(*, Categories(*)), DailyWork(hours)").eq('user',
+                                                                                                         user_id).execute().data
+    hours_per_category = {}
+
+    def get_hours(skill):
+        total = 0
+        if skill['DailyWork']:
+            for day_worked in skill['DailyWork']:
+                total += day_worked['hours']
+
+        total += skill['init_hours']
+        return total
+
+    for skill in user_skills:
+        skill_hours = get_hours(skill)
+        skill_category = skill['Tags']['Categories']['category']
+
+        if skill_category not in hours_per_category:
+            hours_per_category[skill_category] = [skill_hours, [(skill['Tags']['name'], skill_hours)]]
+        else:
+            hours_per_category[skill_category][0] += skill_hours
+            hours_per_category[skill_category][1].append((skill['Tags']['name'], skill_hours))
+
+    sorted_categories = sorted(hours_per_category.items(), key=lambda val: val[1][0], reverse=True)[:3]
+
+    result = []
+    for elem in sorted_categories:
+        result.append({"name": elem[0], "total_hours": elem[1][0], "skills": elem[1][1]})
+
+    return result
