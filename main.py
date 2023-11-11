@@ -49,6 +49,6 @@ async def get_skill_streak(user_id, skill_id):
     return user_query.get_user_skill_streak(user_id, skill_id, client)
 
 
-@app.get("/user/recomandation/{tags}/{level}")
+@app.get("/user/recommendation/{tags}/{level}")
 async def get_ai_recommendation(tags: str, level: int):
     return ai.skill_improv_task_suggestion(tags, level)
