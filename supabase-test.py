@@ -13,4 +13,5 @@ client = supabase.create_client(url, key)
 # response = client.table('Organizations').select('*, User()').eq('id', 1).order('date').execute()
 # print(response)
 
-print(gui.get_user_dailies(2, client))
+resp = gui.get_user_dailies(2, client)
+print(resp)
