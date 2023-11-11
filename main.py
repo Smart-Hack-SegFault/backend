@@ -2,6 +2,7 @@ import os
 import dotenv
 import supabase
 import pandas as pd
+from ai_integration import gpt_integration as ai
 from utils import get_user_info as user_query
 from data_manipulation import statistics
 
@@ -46,3 +47,8 @@ async def get_recommended_skills(user_id):
 @app.get("/user/{user_id}/skill/{skill_id}/streak")
 async def get_skill_streak(user_id, skill_id):
     return user_query.get_user_skill_streak(user_id, skill_id, client)
+
+
+@app.get("/user/recomandation/{tags}/{level}")
+async def get_ai_recommendation(tags: str, level: int):
+    return ai.skill_improv_task_suggestion(tags, level)
