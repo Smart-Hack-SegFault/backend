@@ -1,15 +1,3 @@
-import os
-import dotenv
-import supabase
-
-dotenv.load_dotenv()
-
-url = os.environ.get("SUPABASE_URL")
-key = os.environ.get("SUPABASE_KEY")
-
-client = supabase.create_client(url, key)
-
-
 def get_user_hours(user_id, tag_id, sb_client):
     user_skill = sb_client.table('User_Skill').select('*').eq('user', user_id).eq('tag', tag_id).execute().data[0]
     days_worked = sb_client.table('DailyWork').select('*').eq('user_skill', user_skill['id']).execute().data
@@ -19,6 +7,3 @@ def get_user_hours(user_id, tag_id, sb_client):
         days_hours_sum += day['hours']
 
     return user_skill['init_hours'] + days_hours_sum
-
-
-print(get_user_hours(2, 7, client))
