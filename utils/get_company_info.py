@@ -10,7 +10,7 @@ def get_user_hours(user_id, tag_id, sb_client):
 
 
 def get_employees(org_id, sb_client):
-    employees = sb_client.table('User').select('*').eq('organization', org_id).order('org_hours', desc=True).execute().data
+    employees = sb_client.table('User').select('*, Roles(*)').eq('organization', org_id).order('org_hours', desc=True).execute().data
     return employees
 
 
