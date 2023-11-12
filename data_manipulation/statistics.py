@@ -11,6 +11,6 @@ def compute_stats_work_days(data):
 
 
 def cmpute_stats_org_hours(data):
-    stats = data.agg({"org_hours": ["mean", "median", "std"]})
-    stats = pd.Series.to_dict(stats['hours'])
+    stats = pd.DataFrame(data).agg({"org_hours": ["mean", "median", "std"]})
+    stats = pd.Series.to_dict(stats['org_hours'])
     return stats
