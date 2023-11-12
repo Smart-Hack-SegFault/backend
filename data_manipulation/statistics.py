@@ -1,7 +1,4 @@
 import pandas as pd
-import matplotlib.pyplot as plt
-import json
-
 
 def compute_stats_work_days(data):
     stats = data.agg({"hours": ["mean", "median", "std"]})
