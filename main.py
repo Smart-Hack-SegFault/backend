@@ -75,6 +75,7 @@ async def get_ai_recommendation(tags: str, level: int):
 async def get_user_top_categories(user_id):
     return user_query.get_user_top_categories(user_id, client)
 
+
 @app.get('/org/{org_id}/employees')
 async def get_org_employees(org_id):
     return org_query.get_employees(org_id, client)
