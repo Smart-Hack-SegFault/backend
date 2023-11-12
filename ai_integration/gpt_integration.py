@@ -32,7 +32,7 @@ def skill_improv_task_suggestion(tags, level):  # tags va fi un string si level 
                         "content": query_body
                     }
                 ],
-                model="gpt-3.5-turbo",
+                model="gpt-4",
                 max_tokens=512,
                 temperature=1.01,
                 stop=["\n{"]
