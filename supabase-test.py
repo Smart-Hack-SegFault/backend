@@ -10,8 +10,6 @@ url = os.environ.get("SUPABASE_URL")
 key = os.environ.get("SUPABASE_KEY")
 
 client = supabase.create_client(url, key)
-# response = client.table('Organizations').select('*, User()').eq('id', 1).order('date').execute()
-# print(response)
 
-resp = gui.get_user_top_categories(2, client)
+resp = client.table('User').select('*').eq('organization', 1).execute().data
 print(resp)

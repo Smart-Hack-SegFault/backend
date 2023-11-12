@@ -3,6 +3,7 @@ import dotenv
 import supabase
 import pandas as pd
 from utils import get_user_info as user_query
+from utils import get_company_info as org_query
 from data_manipulation import statistics
 from ai_integration import gpt_integration as ai
 
@@ -73,3 +74,7 @@ async def get_ai_recommendation(tags: str, level: int):
 @app.get("/user/{user_id}/top-categories")
 async def get_user_top_categories(user_id):
     return user_query.get_user_top_categories(user_id, client)
+
+@app.get('/org/{org_id}/employees')
+async def get_org_employees(org_id):
+    return org_query.get_employees(org_id, client)
