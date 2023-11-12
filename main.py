@@ -84,7 +84,7 @@ async def get_org_employees(org_id):
 @app.get("/org/{org_id}/{role_id}/stats")
 async def get_role_stats(org_id, role_id):
     data = org_query.get_role(org_id, role_id, client)
-    stats = statistics.cmpute_stats_org_hours(data)
+    stats = statistics.compute_stats_org_hours(data)
     return stats
 
 
