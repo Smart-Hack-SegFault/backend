@@ -37,10 +37,14 @@ def get_user_skill_streak(user_id, skill_id, sb_client):
     dates = [datetime.strptime(date['date'], "%Y-%m-%d") for date in skill_dailies]
 
     if dates:
+        sub = timedelta(days=1)
         streak = 1
 
+        if (dates[0].date() != datetime.today().date() - sub) and (dates[0].date() != datetime.today().date()):
+            return 0
+
         for i in range(1, len(skill_dailies)):
-            if dates[i - 1] - timedelta(days=1) == dates[i]:
+            if dates[i - 1].date() - sub == dates[i].date():
                 streak += 1
 
         return streak
