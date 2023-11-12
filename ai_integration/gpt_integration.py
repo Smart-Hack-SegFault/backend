@@ -48,3 +48,10 @@ def skill_improv_task_suggestion(tags, level):  # tags va fi un string si level 
             raise ValueError
         except:
             continue
+
+    fake = {
+              "project": "Building a Web Scraping Tool",
+              "description": "Create a Python script that uses libraries like BeautifulSoup and requests to scrape data from specific websites. Implement features like handling dynamic content, using proxies, and saving scraped data to a file or database.",
+              "hours": 30
+    }
+    return fake
