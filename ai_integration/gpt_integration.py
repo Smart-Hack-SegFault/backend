@@ -5,7 +5,7 @@ import json
 
 
 dotenv.load_dotenv()
-api_matches = [('2', '2', 'gpt-4', 1.10), ('3', '2', 'gpt-4', 1.10), ('', '', 'gpt-3.5-turbo', 1.25)]
+api_matches = [('', '', 'gpt-3.5-turbo', 1.25), ('', '', 'gpt-3.5-turbo', 1.25), ('', '', 'gpt-3.5-turbo', 1.25)]
 
 
 
