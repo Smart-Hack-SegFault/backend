@@ -6,7 +6,7 @@ import json
 
 dotenv.load_dotenv()
 system_prompt = os.environ.get("SYSTEM_PROMPT")
-api_key = os.environ.get("OPENAI_KEY")
+api_key = os.environ.get("OPENAI_KEY2")
 
 client = OpenAI(
     # defaults to os.environ.get("OPENAI_API_KEY")
