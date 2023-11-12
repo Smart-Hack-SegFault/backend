@@ -6,7 +6,7 @@ import json
 
 dotenv.load_dotenv()
 system_prompt = os.environ.get("SYSTEM_PROMPT")
-api_key = os.environ.get("OPENAI_KEY")
+api_key = os.environ.get("OPENAI_KEY2")
 
 client = OpenAI(
     # defaults to os.environ.get("OPENAI_API_KEY")
@@ -32,7 +32,7 @@ def skill_improv_task_suggestion(tags, level):  # tags va fi un string si level 
                         "content": query_body
                     }
                 ],
-                model="gpt-3.5-turbo",
+                model="gpt-4",
                 max_tokens=512,
                 temperature=1.01,
                 stop=["\n{"]

@@ -3,6 +3,7 @@ import dotenv
 import supabase
 import pandas as pd
 from utils import get_user_info as user_query
+from utils import get_company_info as org_query
 from data_manipulation import statistics
 from ai_integration import gpt_integration as ai
 
@@ -46,7 +47,7 @@ async def fetch_user_skill_hours(user_id, tag_id):
 async def fetch_user_skill_days_stats(user_id, tag_id):
     temp = pd.DataFrame(user_query.get_user_skill_days(user_id, tag_id, client))
     data = temp[['date', 'hours']]
-    stats = statistics.compute_stats_work_days(data)
+    stats, data = statistics.compute_stats_work_days(data)
     return stats, data
 
 
@@ -73,3 +74,7 @@ async def get_ai_recommendation(tags: str, level: int):
 @app.get("/user/{user_id}/top-categories")
 async def get_user_top_categories(user_id):
     return user_query.get_user_top_categories(user_id, client)
+
+@app.get('/org/{org_id}/employees')
+async def get_org_employees(org_id):
+    return org_query.get_employees(org_id, client)

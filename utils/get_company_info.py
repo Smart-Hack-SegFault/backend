@@ -7,3 +7,9 @@ def get_user_hours(user_id, tag_id, sb_client):
         days_hours_sum += day['hours']
 
     return user_skill['init_hours'] + days_hours_sum
+
+
+def get_employees(org_id, sb_client):
+    employees = sb_client.table('Users').select('*').eq('organization', org_id).execute().data
+    return employees
+
