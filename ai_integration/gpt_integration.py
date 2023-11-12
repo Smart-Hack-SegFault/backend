@@ -33,6 +33,7 @@ def skill_improv_task_suggestion(tags, level):  # tags va fi un string si level 
                     }
                 ],
                 model="gpt-3.5-turbo",
+                temperature=1.25,
                 max_tokens=512,
                 stop=["\n{"]
             )
