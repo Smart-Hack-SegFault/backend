@@ -86,3 +86,8 @@ async def get_role_stats(org_id, role_id):
     data = org_query.get_role(org_id, role_id, client)
     stats = statistics.cmpute_stats_org_hours(data)
     return stats
+
+
+@app.get("/role/{role_id}/top_employees")
+async def get_role_stats(role_id):
+    return org_query.get_role_employees_points(role_id, client)

@@ -3,6 +3,7 @@ import dotenv
 import supabase
 
 from utils import get_user_info as gui
+from utils import get_company_info as gci
 
 dotenv.load_dotenv()
 
@@ -13,5 +14,5 @@ client = supabase.create_client(url, key)
 # response = client.table('Organizations').select('*, User()').eq('id', 1).order('date').execute()
 # print(response)
 
-resp = gui.get_user_skill_streak(2, 7, client)
+resp = gci.get_role_employees_points(3, client)
 print(resp)

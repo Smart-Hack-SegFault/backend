@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 
 def get_recommended_skills(user_id, sb_client):
-    user_skills = sb_client.table('User_Skill').select('Tags(*)').eq('user', user_id).execute().data
+    user_skills = sb_client.table('User_Skill').select('Tags(*, Categories(*)').eq('user', user_id).execute().data
     categories = [category['Tags']['category'] for category in user_skills]
 
     skills = sb_client.table('Tags').select('*').in_('category', categories).execute().data
