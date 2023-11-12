@@ -2,10 +2,10 @@ from datetime import datetime, timedelta
 
 
 def get_recommended_skills(user_id, sb_client):
-    user_skills = sb_client.table('User_Skill').select('Tags(*, Categories(*)').eq('user', user_id).execute().data
+    user_skills = sb_client.table('User_Skill').select('Tags(*, Categories(*))').eq('user', user_id).execute().data
     categories = [category['Tags']['category'] for category in user_skills]
 
-    skills = sb_client.table('Tags').select('*').in_('category', categories).execute().data
+    skills = sb_client.table('Tags').select('*, Categories(*)').in_('category', categories).execute().data
 
     user_skills_id = [val['Tags']['id'] for val in user_skills]
     return [skill for skill in skills if skill['id'] not in user_skills_id]
