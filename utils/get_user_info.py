@@ -44,6 +44,8 @@ def get_user_skill_streak(user_id, skill_id, sb_client):
             return 0
 
         for i in range(1, len(skill_dailies)):
+            if dates[i - 1].date() == dates[i].date():
+                continue
             if dates[i - 1].date() - sub == dates[i].date():
                 streak += 1
 
