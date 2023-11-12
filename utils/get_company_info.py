@@ -38,5 +38,5 @@ def get_role_employees_points(role_id, sb_client):
                 else:
                     employees_points[employee['name']] += skill['points']
 
-    result = sorted(employees_points.items(), key=lambda val: val[0][1], reverse=True)
+    result = sorted(employees_points.items(), key=lambda val: val[1], reverse=True)
     return [{"name": val[0], "points": val[1]} for val in result]

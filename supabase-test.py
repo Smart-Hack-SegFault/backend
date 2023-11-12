@@ -14,5 +14,5 @@ client = supabase.create_client(url, key)
 # response = client.table('Organizations').select('*, User()').eq('id', 1).order('date').execute()
 # print(response)
 
-resp = gui.get_recommended_skills(2, client)
+resp = gci.get_role_employees_points(4, client)
 print(resp)
