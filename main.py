@@ -46,7 +46,7 @@ async def fetch_user_skill_hours(user_id, tag_id):
 async def fetch_user_skill_days_stats(user_id, tag_id):
     temp = pd.DataFrame(user_query.get_user_skill_days(user_id, tag_id, client))
     data = temp[['date', 'hours']]
-    stats = statistics.compute_stats_work_days(data)
+    stats, data = statistics.compute_stats_work_days(data)
     return stats, data
 
 

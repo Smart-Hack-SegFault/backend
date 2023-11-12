@@ -1,4 +1,3 @@
-import json
 from datetime import datetime, timedelta
 
 
@@ -59,6 +58,10 @@ def get_user_dailies(user_id, sb_client):
             result.append(date)
 
     return result
+
+
+def get_user_top_categories(user_id, sb_client):
+    data = sb_client.table("User_Skill").select("*, Tags(*, Categories(*))").execute()
 
 
 def get_user_top_categories(user_id, sb_client):
