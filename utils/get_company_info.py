@@ -13,3 +13,7 @@ def get_employees(org_id, sb_client):
     employees = sb_client.table('User').select('*').eq('organization', org_id).order('org_hours', desc=True).execute().data
     return employees
 
+
+def get_role(org_id, role_id, sb_client):
+    role = sb_client.table('User').select('*').eq('organization', org_id).order('org_hours', desc=True).eq('role', role_id).execute().data
+    return role
